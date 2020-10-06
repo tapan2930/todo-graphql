@@ -17,7 +17,6 @@ const Todo = ({todo}) => {
   );
 
   const [isCompleted, setIsCompleted] = useState(false)
-  const [isprocessed, setIsProcessed] = useState(true)
   
   const [deleteTodo, { loading: loadingdeleted, errorCompleted } ] = useMutation(DELETETODOMUTATION);
   const [todoCompleted, { loading: loadingCompleted, error }] = useMutation(ISCOMPLETEDMUTATION);
@@ -29,14 +28,11 @@ const Todo = ({todo}) => {
         variables: {id, isCompleted: !isCompleted},
         refetchQueries:  [{query: GETTODOS}],
        
-      }).then(()=>{
-        setIsProcessed(!isprocessed)
       })
      
   }
 
   const onDeletedHandler = (id) =>{
-    setIsProcessed(!isprocessed)
    deleteTodo({
      variables: {id},
      refetchQueries:  [{query: GETTODOS}],

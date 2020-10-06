@@ -5,7 +5,6 @@ import spinner from '../assets/spinner.svg'
 
 const AddTodo = () => {
     const [todo, settodo] = useState("")
-    const [isprocessed, setIsProcessed] = useState(true)
     const [addTodo, { loading, error }] = useMutation(ADDTODOMUTATION);
 
     const onAddtodobtnClickHandler = (e)=>{
@@ -14,12 +13,11 @@ const AddTodo = () => {
             alert("Empty Field...")
             return null
         }
-        setIsProcessed(!isprocessed)
         addTodo( {
             variables: {todo: todo},
             refetchQueries:  [{query: GETTODOS}],
         })
-
+        settodo("")
         return null
     }
   return (
